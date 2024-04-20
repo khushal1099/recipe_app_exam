@@ -24,7 +24,7 @@ class DbHelper {
           'CREATE TABLE "Recipe" ('
               '"id" INTEGER, '
               '"name" TEXT NOT NULL, '
-              '"description" NUMERIC NOT NULL, '
+              '"description" TEXT NOT NULL, '
               '"image" TEXT , '
               'PRIMARY KEY("id" AUTOINCREMENT))',
         );

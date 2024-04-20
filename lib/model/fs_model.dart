@@ -29,17 +29,36 @@ class FSmodel {
         .set(authUser.toJson());
   }
 
-  void addRecipe(String title, String decription, String image) {
-    Recipe recipe = Recipe(
-      title: title,
-      description: decription,
-      recipeimage: image,
-    );
-
-    FirebaseFirestore.instance
-        .collection("Recipes")
-        .doc(FirebaseAuth.instance.currentUser?.uid??"")
-        .set(recipe.toJson());
+  // void addRecipe(String name, String description, String image) {
+  //   FirebaseFirestore.instance.collection('Recipes').add({
+  //     'name': name,
+  //     'description': description,
+  //     'image': image,
+  //     // Add other fields as needed
+  //   }).then((value) {
+  //     print('Recipe added successfully!');
+  //   }).catchError((error) {
+  //     print('Failed to add recipe: $error');
+  //   });
+  // }
+  void addRecipeToFirestore(String name, String description, String image) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance.collection("recipes").add({
+        'name': name,
+        'description': description,
+        'image': image,
+        // Add other fields as needed
+        'userId': currentUser.uid, // Optionally store the user ID
+      }).then((value) {
+        print('Recipe added successfully!');
+      }).catchError((error) {
+        print('Failed to add recipe: $error');
+      });
+    } else {
+      print('User not authenticated!');
+    }
   }
+
 
 }
