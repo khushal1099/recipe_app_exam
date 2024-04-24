@@ -28,7 +28,9 @@ class _SplashscreenState extends State<Splashscreen> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        color: Colors.red,
+        height: MediaQuery.sizeOf(context).height * 3,
+        width: MediaQuery.sizeOf(context).width * 4,
+        decoration: BoxDecoration(image: DecorationImage(image: AssetImage("recipe.jpg"),),),
       ),
     );
   }
